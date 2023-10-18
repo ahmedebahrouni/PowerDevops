@@ -1,11 +1,11 @@
 package tn.esprit.rh.achat;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.rh.achat.entities.Reglement;
 import tn.esprit.rh.achat.repositories.FactureRepository;
 import tn.esprit.rh.achat.repositories.ReglementRepository;
@@ -14,46 +14,89 @@ import tn.esprit.rh.achat.services.ReglementServiceImpl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
-import static org.mockito.Mockito.verify;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
-@ContextConfiguration(classes = {ReglementServiceImpl.class})
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class ReglementTest {
 
-    @MockBean
+    @InjectMocks
+    private ReglementServiceImpl reglementService;
+
+    @Mock
     private FactureRepository factureRepository;
 
-    @MockBean
+    @Mock
     private ReglementRepository reglementRepository;
 
-    @Autowired
-    private ReglementServiceImpl reglementServiceImpl;
-
-    @Test
-    void testRetrieveAllReglements() {
-        ArrayList<Reglement> reglementList = new ArrayList<>();
-        when(reglementRepository.findAll()).thenReturn(reglementList);
-        List<Reglement> actualRetrieveAllReglementsResult = reglementServiceImpl.retrieveAllReglements();
-        assertSame(reglementList, actualRetrieveAllReglementsResult);
-        assertTrue(actualRetrieveAllReglementsResult.isEmpty());
-        verify(reglementRepository).findAll();
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    void testAddReglement() {
+    public void testRetrieveAllReglements() {
+        List<Reglement> reglements = new ArrayList<>();
+        // Add some Reglement objects to the list
+
+        when(reglementRepository.findAll()).thenReturn(reglements);
+
+        List<Reglement> result = reglementService.retrieveAllReglements();
+
+        assertEquals(reglements, result);
+    }
+
+    @Test
+    public void testAddReglement() {
         Reglement reglement = new Reglement();
-        when(reglementRepository.save(reglement)).thenReturn(reglement);
+        // Initialize reglement as needed
 
-        Reglement addedReglement = reglementServiceImpl.addReglement(reglement);
+        when(reglementRepository.save(any(Reglement.class))).thenReturn(reglement);
 
-        assertSame(reglement, addedReglement);
+        Reglement result = reglementService.addReglement(reglement);
+
+        assertEquals(reglement, result);
     }
 
-    // Add more test methods for other functions in ReglementServiceImpl if needed
+    @Test
+    public void testRetrieveReglement() {
+        Long id = 1L; // Replace with the appropriate ID
+        Reglement reglement = new Reglement();
+        // Initialize reglement as needed
+
+        when(reglementRepository.findById(id)).thenReturn(Optional.of(reglement));
+
+        Reglement result = reglementService.retrieveReglement(id);
+
+        assertEquals(reglement, result);
+    }
+
+    @Test
+    public void testRetrieveReglementByFacture() {
+        Long idFacture = 1L; // Replace with the appropriate ID
+        List<Reglement> reglements = new ArrayList<>();
+        // Add some Reglement objects to the list
+
+        when(reglementRepository.retrieveReglementByFacture(idFacture)).thenReturn(reglements);
+
+        List<Reglement> result = reglementService.retrieveReglementByFacture(idFacture);
+
+        assertEquals(reglements, result);
+    }
+
+    @Test
+    public void testGetChiffreAffaireEntreDeuxDate() {
+        Date startDate = new Date(); // Replace with a specific date
+        Date endDate = new Date();   // Replace with a specific date
+
+        float chiffreAffaire = 1000.0f; // Replace with the expected result
+
+        when(reglementRepository.getChiffreAffaireEntreDeuxDate(startDate, endDate)).thenReturn(chiffreAffaire);
+
+        float result = reglementService.getChiffreAffaireEntreDeuxDate(startDate, endDate);
+
+        assertEquals(chiffreAffaire, result, 0.0); // Use 0.0 as the delta for float comparison
+    }
 }
