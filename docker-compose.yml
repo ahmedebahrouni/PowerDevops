@@ -19,7 +19,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image:  ahmed1919/powerdevops
+    image:  ahmed1919/spring-app:second
     restart: on-failure
     env_file: ./.env
     ports:
