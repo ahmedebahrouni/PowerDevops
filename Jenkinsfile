@@ -60,7 +60,7 @@ sh " mvn clean verify sonar:sonar -Dsonar.projectKey=powerdevops -Dsonar.project
 stage('Build Docker Image') {
                       steps {
                           script {
-                            sh 'docker build -t ahmed1919/powerdevops'
+                            sh 'docker build -t ahmed1919/powerdevops .'
                           }
                       }
                   }
@@ -71,12 +71,13 @@ stage('Build Docker Image') {
 				sh 'docker login -u ahmed1919 --password dckr_pat_wRsBljrIeVpG1l8CBB5TxXBXKqA'
                                             }
 		  }
-	    
+
 	                      stage('Push Docker Image') {
                                         steps {
                                    sh 'docker push ahmed1919/powerdevops'
                                             }
 		  }
+
 
 
 		   stage('Run Spring && MySQL Containers') {
