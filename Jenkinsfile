@@ -47,7 +47,7 @@ sh " mvn clean verify sonar:sonar -Dsonar.projectKey=powerdevops -Dsonar.project
         }
 
 
-        /* stage('Publish to Nexus') {
+         stage('Publish to Nexus') {
             steps {
 
 
@@ -55,7 +55,7 @@ sh " mvn clean verify sonar:sonar -Dsonar.projectKey=powerdevops -Dsonar.project
 
 
             }
-        } */
+        }
 /*
 stage('Build Docker Image') {
                       steps {
