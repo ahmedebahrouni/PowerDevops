@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment # Kubernetes resource kind we are creating
 metadata:
-  name: Deployment-spring-app
+  name: powerdevops
 spec:
   selector:
     matchLabels:
-      app: spring-app
+      app: powerdevops
   replicas: 1 # Number of replicas that will be created for this deployment
   template:
     metadata:
       labels:
-        app: spring-app
+        app: powerdevops
     spec:
       containers:
-        - name: tp-achat-container
+        - name: achat
           image: ahmed1919/powerdevops
           # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
