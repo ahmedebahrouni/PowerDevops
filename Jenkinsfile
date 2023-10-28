@@ -60,7 +60,7 @@ sh " mvn clean verify sonar:sonar -Dsonar.projectKey=powerdevops -Dsonar.project
 stage('Build Docker Image') {
                       steps {
                           script {
-                            sh 'docker build -t ahmed1919/spring-app:second .'
+                            sh 'docker build -t test/spring-app:second .'
                           }
                       }
                   }
@@ -74,7 +74,7 @@ stage('Build Docker Image') {
 
 	                      stage('Push Docker Image') {
                                         steps {
-                                   sh 'docker push ahmed1919/spring-app:second'
+                                   sh 'docker push test/spring-app:second'
                                             }
 		  }
 
