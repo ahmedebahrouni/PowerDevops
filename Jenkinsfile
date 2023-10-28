@@ -57,7 +57,7 @@ sh " mvn clean verify sonar:sonar -Dsonar.projectKey=powerdevops -Dsonar.project
 
             }
         }
-/*
+
 stage('Build Docker Image') {
                       steps {
                           script {
@@ -91,14 +91,14 @@ stage('Build Docker Image') {
 
 
 	    
-*/
+
 
      
 }
 
 	    
         post {
-		/*success{
+
 		mail bcc: '', body: '''Dear Med ahmed bahrouni ,
 we are happy to inform you that your pipeline build was successful. 
 Great work ! 
@@ -110,10 +110,9 @@ mail bcc: '', body: '''Dear bahrouni ahmed,
 we are sorry to inform you that your pipeline build failed. 
 Keep working ! 
 -Jenkins Team-''', cc: '', from: 'ahmed.bahrouni@esprit.tn', replyTo: '', subject: 'Build Finished - Failure', to: 'ahmed.bahrouni@esprit.tn'
-		}*/
+
 
        always {
-		//emailext attachLog: true, body: '', subject: 'Build finished',from: 'ahmed.bahrouni@esprit.tn' , to: 'ahmed.bahrouni@esprit.tn'
             cleanWs()
        }
     }
