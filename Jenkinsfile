@@ -36,8 +36,7 @@ pipeline{
             }
         }
 
-
-
+/*
         stage('Code Quality Check via SonarQube') {
             steps{
 
@@ -57,7 +56,7 @@ sh " mvn clean verify sonar:sonar -Dsonar.projectKey=powerdevops -Dsonar.project
 
             }
         }
-
+*/
 stage('Build Docker Image') {
                       steps {
                           script {

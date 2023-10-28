@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: achat
-          image: ahmed1919/powerdevops
+          image: ahmed1919/spring-app
           # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
           ports:
