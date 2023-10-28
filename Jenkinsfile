@@ -60,21 +60,19 @@ sh " mvn clean verify sonar:sonar -Dsonar.projectKey=powerdevops -Dsonar.project
 stage('Build Docker Image') {
                       steps {
                           script {
-                            sh 'docker build -t test/spring-app:second .'
-                          }
+                            sh 'docker build -t ahmed1919/powerdevops .'                          }
                       }
                   }
 
                   stage('login dockerhub') {
                                         steps {
 
-				sh 'docker login -u ahmed1919 --password dckr_pat_nrAQFnnW7auYxp0m-H7IoGSQ9To'
-                                            }
+       sh 'docker login -u ahmed1919 --password dckr_pat_wRsBljrIeVpG1l8CBB5TxXBXKqA'                                            }
 		  }
 
 	                      stage('Push Docker Image') {
                                         steps {
-                                   sh 'docker push test/spring-app:second'
+                                   sh 'docker push ahmed1919/powerdevops'
                                             }
 		  }
 

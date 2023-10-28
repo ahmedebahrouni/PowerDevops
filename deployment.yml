@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tp-achat-container
-          image: azizbenhaha/spring-app
+          image: ahmed1919/powerdevops
           # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
           ports:
