@@ -13,8 +13,8 @@ spec:
         app: spring-app
     spec:
       containers:
-        - name: achat
-          image: ahmed1919/spring-app
+        - name: tp-achat-container
+          image: azizbenhaha/spring-app
           # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
           ports:
