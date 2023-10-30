@@ -62,7 +62,7 @@ sh " mvn clean verify sonar:sonar -Dsonar.projectKey=powerdevops -Dsonar.project
 stage('Build Docker Image') {
                       steps {
                           script {
-                            sh 'docker build -t ahmed1919/ahmedtest C:\Users\Asus\Documents\GitHub\corr\PowerDevops'
+                            sh 'docker build -t ahmed1919/ahmedtest .'
                           }
                       }
                   }
