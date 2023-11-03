@@ -1,4 +1,4 @@
-FROM adoptopenjdk:8-jdk-hotspot
+FROM openjdk:8-jre-slim
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
