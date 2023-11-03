@@ -6,10 +6,10 @@ RUN apt-get update && apt-get install -y \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/*
 
-ENV JAR_URL=http://192.168.1.133:8081/repository/maven-releases/
+ENV JAR_URL=http://192.168.162.222:8081/repository/maven-releases/tn/esprit/rh/achat/1.0/achat-1.0.jar
 
-RUN curl -o app.jar ${JAR_URL}
+RUN curl -o achat-1.0.jar ${JAR_URL}
 
-# COPY target/my-spring-boot-app.jar app.jar
+# COPY target/my-spring-boot-achat-1.0.jar achat-1.0.jar
 EXPOSE 8082
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","achat-1.0.jar"]
