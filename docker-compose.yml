@@ -6,7 +6,7 @@ services:
      restart: unless-stopped
      container_name: achatsecteur-db
      ports:
-       - 3306:3306
+       - "3306:3306"
      volumes:
        - db:/var/lib/mysql
      environment:
