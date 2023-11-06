@@ -4,6 +4,7 @@ services:
   mysqldb:
      image: mysql:5.7
      restart: unless-stopped
+     container_name: achatsecteur-db
      ports:
        - 3306:3306
      volumes:
