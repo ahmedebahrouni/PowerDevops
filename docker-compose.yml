@@ -23,7 +23,7 @@ services:
        - mysqldb
      environment:
 
-       SPRING_DATASOURCE_URL: jdbc:mysql://achatsecteur-db:3306/achat_db?&createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+       SPRING_DATASOURCE_URL: jdbc:mysql://achatsecteur-db:3306/achatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 
        SPRING_DATASOURCE_USERNAME: root
 
