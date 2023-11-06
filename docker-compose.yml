@@ -16,7 +16,8 @@ services:
 
   app_achat_backend:
      image: mohamedaliazouzi/achat
-     restart: unless-stopped
+
+     restart: on-failure
      ports:
        - "8082:8082"
      depends_on:
