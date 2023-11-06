@@ -4,7 +4,7 @@ WORKDIR /app
 
 EXPOSE 8082
 
-
+#Apthere
 RUN apt-get update && apt-get install -y \
   curl \
   ca-certificates \

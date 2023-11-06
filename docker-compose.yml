@@ -12,7 +12,7 @@ services:
      environment:
        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
        MYSQL_DATABASE: achat_db
-
+#backendapp
 
   app_achat_backend:
      image: mohamedaliazouzi/achat
