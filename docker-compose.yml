@@ -2,32 +2,53 @@ version: '3.8'
 
 services:
   mysqldb:
-     image: mysql:5.7
-     restart: unless-stopped
-     container_name: msqldb
+     image: mysql:latest
+     container_name: mysqldb
      environment:
        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
        MYSQL_DATABASE: achatdb
      ports:
        - "3306:3306"
      volumes:
-       - db:/var/lib/mysql
+       - ./data.sql:/docker-entrypoint-initdb.d/data.sql
+     networks:
+       - my-network
+     restart: always
 
 #backendapp
 
   app_achat_backend:
      image: mohamedaliazouzi/achat
-     restart: on-failure
+     container_name: springboot_achat
      ports:
-       - "8082:8082"
+       - "8082:8089"
      depends_on:
        - mysqldb
+     environment:
+
+       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/achat_db?&createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+
+       SPRING_DATASOURCE_USERNAME: root
+
+       SPRING_DATASOURCE_PASSWORD:
+
+     networks:
+
+       - my-network
+
+     volumes:
+
+       - ./backend-data:/app/data
+
+     restart: always  # Add this line to enable automatic restart
+
 
      stdin_open: true
      tty: true
 
-volumes:
-  db:
+networks:
+
+  my-network:
 
 
 #dockercomposechanges
