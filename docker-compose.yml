@@ -3,7 +3,7 @@ version: '3'
 services:
   mysqldb:
      image: mysql:latest
-     container_name: mysql_db
+     container_name: mysqldb
      environment:
        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
        MYSQL_DATABASE: achat_db
@@ -26,7 +26,7 @@ services:
        - mysqldb
      environment:
 
-       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/achat_db?&createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/achat_db?&createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 
        SPRING_DATASOURCE_USERNAME: root
 
@@ -40,7 +40,7 @@ services:
 
        - ./backend-data:/app/data
 
-     restart: always  # Add this line to enable automatic restart
+     restart: always
 
 
      stdin_open: true
