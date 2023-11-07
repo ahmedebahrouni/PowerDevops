@@ -4,6 +4,7 @@ services:
   mysqldb:
      image: mysql:5.7
      restart: unless-stopped
+     container_name: msqldb
      environment:
        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
        MYSQL_DATABASE: achatdb
