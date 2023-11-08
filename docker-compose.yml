@@ -11,8 +11,8 @@ services:
        - "3306:3306"
      volumes:
        - ./data.sql:/docker-entrypoint-initdb.d/data.sql
-     networks:
-       - my-network
+#     networks:
+#       - my-network
      restart: always
 
 #backendapp
