@@ -32,9 +32,9 @@ services:
 
        SPRING_DATASOURCE_PASSWORD:
 
-     networks:
-
-       - my-network
+#     networks:
+#
+#       - my-network
 
      volumes:
 
@@ -46,9 +46,9 @@ services:
      stdin_open: true
      tty: true
 
-networks:
-
-  my-network:
+#networks:
+#
+#  my-network:
 
 
 #dockercomposechanges
