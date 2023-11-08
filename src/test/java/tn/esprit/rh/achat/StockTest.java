@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 
 @ContextConfiguration(classes = {StockServiceImpl.class})
 @ExtendWith(SpringExtension.class)
-public class StockTest {
+ class StockTest {
     @MockBean
     private StockRepository stockRepository;
     @Autowired
@@ -65,7 +65,7 @@ public class StockTest {
 
     }
     @Test
-    public void testUpdateStock() {
+     void testUpdateStock() {
         Stock stock = new Stock();
 
 
