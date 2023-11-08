@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mysqldb:
-     image: mysql:latest
+     image: mysql:8.1.0
      container_name: mysqldb
      environment:
        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
