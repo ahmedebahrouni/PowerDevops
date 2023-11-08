@@ -49,6 +49,7 @@ services:
 networks:
 
   my-network:
+    external: true
 
 
 #dockercomposechanges
