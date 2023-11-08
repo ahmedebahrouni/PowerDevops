@@ -35,7 +35,7 @@ pipeline{
                		 sh "mvn test "
             }
         }
-/*
+
 
         stage('Code Quality Check via SonarQube') {
             steps{
@@ -57,12 +57,12 @@ sh " mvn clean verify sonar:sonar -Dsonar.projectKey=powerdevops -Dsonar.project
             }
         }
 
-*/
+
 
 stage('Build Docker Image') {
                       steps {
                           script {
-sh 'docker build -t ahmed1919/ahmedtest /C:/Users/Asus/Documents/GitHub/corr/PowerDevops'
+            sh 'docker build -t ahmed1919/ahmedtest1 .'
 
                           }
                       }
@@ -77,7 +77,7 @@ sh 'docker build -t ahmed1919/ahmedtest /C:/Users/Asus/Documents/GitHub/corr/Pow
 
 	                      stage('Push Docker Image') {
                                         steps {
-                                   sh 'docker push ahmed1919/ahmedtest'
+                                   sh 'docker push ahmed1919/ahmedtest1'
                                             }
 		  }
 
