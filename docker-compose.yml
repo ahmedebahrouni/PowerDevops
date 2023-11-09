@@ -21,7 +21,7 @@ services:
      image: mohamedaliazouzi/achat
      container_name: springboot_achat
      ports:
-       - "8082:8089"
+       - "8082:8082"
      depends_on:
        - mysqldb
      environment:
