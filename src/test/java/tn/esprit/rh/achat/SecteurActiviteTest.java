@@ -68,7 +68,7 @@ class SecteurActiviteControllerTest {
         // Assert
         resultActions.andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(secteurActiviteId));
+                .andExpect(jsonPath("$.secteurActivite-id").value(secteurActiviteId));
         verify(secteurActiviteService, times(1)).retrieveSecteurActivite(secteurActiviteId);
     }
 
