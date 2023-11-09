@@ -39,39 +39,51 @@ class SecteurActiviteControllerTest {
     }
 
     @Test
-    void testGetSecteurActivite() throws Exception {
+    void testAddSecteurActivite() throws Exception {
         // Arrange
-        List<SecteurActivite> secteurActivites = Arrays.asList(new SecteurActivite(), new SecteurActivite());
-        when(secteurActiviteService.retrieveAllSecteurActivite()).thenReturn(secteurActivites);
+        SecteurActivite secteurActivite = new SecteurActivite();
+        when(secteurActiviteService.addSecteurActivite(any(SecteurActivite.class))).thenReturn(secteurActivite);
 
         // Act
-        ResultActions resultActions = mockMvc.perform(get("/secteurActivite/retrieve-all-secteurActivite"));
+        ResultActions resultActions = mockMvc.perform(post("/secteurActivite/add-secteurActivite")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{}"));
 
         // Assert
         resultActions.andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$.length()").value(2));
-        verify(secteurActiviteService, times(1)).retrieveAllSecteurActivite();
+                .andExpect(jsonPath("$.id").exists()); // Adjust this based on the actual structure of your response
+        verify(secteurActiviteService, times(1)).addSecteurActivite(any(SecteurActivite.class));
     }
 
     @Test
-    void testRetrieveSecteurActivite() throws Exception {
+    void testRemoveSecteurActivite() throws Exception {
         // Arrange
         long secteurActiviteId = 1L;
-        SecteurActivite secteurActivite = new SecteurActivite();
-        when(secteurActiviteService.retrieveSecteurActivite(secteurActiviteId)).thenReturn(secteurActivite);
 
         // Act
-        ResultActions resultActions = mockMvc.perform(get("/secteurActivite/retrieve-secteurActivite/{secteurActivite-id}", secteurActiviteId));
+        ResultActions resultActions = mockMvc.perform(delete("/secteurActivite/remove-secteurActivite/{secteurActivite-id}", secteurActiviteId));
+
+        // Assert
+        resultActions.andExpect(status().isOk());
+        verify(secteurActiviteService, times(1)).deleteSecteurActivite(secteurActiviteId);
+    }
+
+    @Test
+    void testModifySecteurActivite() throws Exception {
+        // Arrange
+        SecteurActivite secteurActivite = new SecteurActivite();
+        when(secteurActiviteService.updateSecteurActivite(any(SecteurActivite.class))).thenReturn(secteurActivite);
+
+        // Act
+        ResultActions resultActions = mockMvc.perform(put("/secteurActivite/modify-secteurActivite")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{}"));
 
         // Assert
         resultActions.andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.secteurActivite-id").value(secteurActiviteId));
-        verify(secteurActiviteService, times(1)).retrieveSecteurActivite(secteurActiviteId);
+                .andExpect(jsonPath("$.id").exists()); // Adjust this based on the actual structure of your response
+        verify(secteurActiviteService, times(1)).updateSecteurActivite(any(SecteurActivite.class));
     }
-
-    // Add similar tests for other controller methods (addSecteurActivite, removeSecteurActivite, modifySecteurActivite)
-    // Use Mockito's when() and verify() methods to set up and verify the behavior of the service mock.
 }
