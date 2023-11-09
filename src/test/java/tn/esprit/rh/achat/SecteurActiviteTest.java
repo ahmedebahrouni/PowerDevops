@@ -52,7 +52,7 @@ class SecteurActiviteTest {
         // Assert
         resultActions.andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").exists()); // Adjust this based on the actual structure of your response
+                .andExpect(jsonPath("$.idSecteurActivite").exists()); // Adjust this based on the actual structure of your response
         verify(secteurActiviteService, times(1)).addSecteurActivite(any(SecteurActivite.class));
     }
 
@@ -83,7 +83,7 @@ class SecteurActiviteTest {
         // Assert
         resultActions.andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").exists()); // Adjust this based on the actual structure of your response
+                .andExpect(jsonPath("$.idSecteurActivite").exists()); // Adjust this based on the actual structure of your response
         verify(secteurActiviteService, times(1)).updateSecteurActivite(any(SecteurActivite.class));
     }
 }
