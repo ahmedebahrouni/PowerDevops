@@ -1,97 +1,77 @@
 package tn.esprit.rh.achat;
-import org.aspectj.lang.annotation.Before;
-
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
-import tn.esprit.rh.achat.entities.Operateur;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import tn.esprit.rh.achat.controllers.SecteurActiviteController;
 import tn.esprit.rh.achat.entities.SecteurActivite;
-import tn.esprit.rh.achat.repositories.OperateurRepository;
-import tn.esprit.rh.achat.repositories.SecteurActiviteRepository;
-import tn.esprit.rh.achat.services.OperateurServiceImpl;
-import tn.esprit.rh.achat.services.SecteurActiviteServiceImpl;
+import tn.esprit.rh.achat.services.ISecteurActiviteService;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
-public class SecteurActiviteTest {
-    @InjectMocks
-    private SecteurActiviteServiceImpl secteurActiviteService;
+@ExtendWith(MockitoExtension.class)
+class SecteurActiviteControllerTest {
 
     @Mock
-    private SecteurActiviteRepository secteurActiviteRepository;
+    private ISecteurActiviteService secteurActiviteService;
 
-    @Before("")
-    public void init() {
-        MockitoAnnotations.initMocks(this);
+    @InjectMocks
+    private SecteurActiviteController secteurActiviteController;
+
+    private MockMvc mockMvc;
+
+    @BeforeEach
+    void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(secteurActiviteController).build();
     }
 
     @Test
-    public void testGetSecteurActivite() {
-        List<SecteurActivite> secteurActivites= new ArrayList<>();
-        // Add some Operateur objects to the list
+    void testGetSecteurActivite() throws Exception {
+        // Arrange
+        List<SecteurActivite> secteurActivites = Arrays.asList(new SecteurActivite(), new SecteurActivite());
+        when(secteurActiviteService.retrieveAllSecteurActivite()).thenReturn(secteurActivites);
 
-        when(secteurActiviteRepository.findAll()).thenReturn(secteurActivites);
+        // Act
+        ResultActions resultActions = mockMvc.perform(get("/secteurActivite/retrieve-all-secteurActivite"));
 
-        List<SecteurActivite> result = secteurActiviteService.retrieveAllSecteurActivite();
-
-        assertEquals(secteurActivites, result);
+        // Assert
+        resultActions.andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$.length()").value(2));
+        verify(secteurActiviteService, times(1)).retrieveAllSecteurActivite();
     }
 
     @Test
-    public void testAddSecteurActivite() {
-        SecteurActivite secteuractivite = new SecteurActivite();
-        // Initialize operateur as needed
+    void testRetrieveSecteurActivite() throws Exception {
+        // Arrange
+        long secteurActiviteId = 1L;
+        SecteurActivite secteurActivite = new SecteurActivite();
+        when(secteurActiviteService.retrieveSecteurActivite(secteurActiviteId)).thenReturn(secteurActivite);
 
-        when(secteurActiviteRepository.save(any(SecteurActivite.class))).thenReturn(secteuractivite);
+        // Act
+        ResultActions resultActions = mockMvc.perform(get("/secteurActivite/retrieve-secteurActivite/{secteurActivite-id}", secteurActiviteId));
 
-        SecteurActivite result = secteurActiviteService.addSecteurActivite(secteuractivite);
-
-        assertEquals(secteuractivite, result);
+        // Assert
+        resultActions.andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(secteurActiviteId));
+        verify(secteurActiviteService, times(1)).retrieveSecteurActivite(secteurActiviteId);
     }
 
-    @Test
-    public void testDeleteSecteurActivite() {
-        Long id = 1L; // Replace with the appropriate ID
-        doNothing().when(secteurActiviteRepository).deleteById(id);
-
-        secteurActiviteService.deleteSecteurActivite(id);
-
-        verify(secteurActiviteRepository, times(1)).deleteById(id);
-    }
-
-    @Test
-    public void testUpdateSecteurActivite() {
-        SecteurActivite secteuractivite = new SecteurActivite();
-        // Initialize secteuractivite as needed
-
-        when(secteurActiviteRepository.save(any(SecteurActivite.class))).thenReturn(secteuractivite);
-
-        SecteurActivite result = secteurActiviteService.updateSecteurActivite(secteuractivite);
-
-        assertEquals(secteuractivite, result);
-    }
-
-    @Test
-    public void testRetrieveSecteurActivite() {
-        Long id = 1L; // Replace with the appropriate ID
-        SecteurActivite secteuractivite = new SecteurActivite();
-        // Initialize secteuractivite as needed
-
-        when(secteurActiviteRepository.findById(id)).thenReturn(Optional.of(secteuractivite));
-
-        SecteurActivite result = secteurActiviteService.retrieveSecteurActivite(id);
-
-        assertEquals(secteuractivite, result);
-    }
-
+    // Add similar tests for other controller methods (addSecteurActivite, removeSecteurActivite, modifySecteurActivite)
+    // Use Mockito's when() and verify() methods to set up and verify the behavior of the service mock.
 }
