@@ -3,9 +3,7 @@ version: '3'
 services:
 
   mysql-db:
-
     image: mysql:latest
-
     container_name: devops-db
 
     ports:
@@ -32,7 +30,7 @@ services:
 
   back-app:
 
-    image: 172.22.0.3:8085/test/aymenellouze/alpine:backapp'
+    image: 172.23.0.2:8085/test/aymenellouze/alpine:backapp
 
     container_name: spring-back-project
 
