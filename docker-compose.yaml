@@ -30,7 +30,7 @@ services:
 
   back-app:
 
-    image: 172.25.0.2:8085/test/aymenellouze/alpine:backapp
+    image: aymen-ellouze-devops:latest
 
     container_name: spring-back-project
 
