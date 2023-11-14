@@ -62,6 +62,19 @@ services:
 
     restart: always  # Add this line to enable automatic restart
 
+  front-app:
+      image: amalnouira/alpine:frontapp
+      container_name: angular-front-project
+      ports:
+        - "80:80"
+      depends_on:
+        - back-app
+      networks:
+        - my-network
+      volumes:
+        - ./frontend-data:/app/dist
+      restart: always
+
 
 
 networks:
