@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: tp-achat-container
-          image: ahmed1919/ahmedtest1
+          image: ahmed1919/spring-app
           # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8080
+            - containerPort: 8089
