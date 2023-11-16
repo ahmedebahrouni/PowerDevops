@@ -10,7 +10,7 @@ pipeline{
             steps{
       			checkout([$class: 'GitSCM', branches: [[name: '*/main']],
 			extensions: [],
-			userRemoteConfigs: [[url: 'https://github.com/ahmedebahrouni/test_cicd.git']]])
+			userRemoteConfigs: [[url: 'https://github.com/ahmedebahrouni/PowerDevops.git']]])
             }
         }
 
