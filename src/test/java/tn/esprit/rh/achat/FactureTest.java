@@ -24,16 +24,7 @@ public class FactureTest {
 
     @MockBean
     private FactureRepository factureRepository;
-    @MockBean
-    private OperateurRepository operateurRepository;
-    @MockBean
-    private DetailFactureRepository detailFactureRepository;
-    @MockBean
-    private FournisseurRepository fournisseurRepository;
-    @MockBean
-    private ProduitRepository produitRepository;
-    @MockBean
-    private ReglementServiceImpl reglementService;
+
 
     @Autowired
     private FactureServiceImpl factureService;
